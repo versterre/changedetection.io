@@ -1,35 +1,26 @@
 steps:
-  # Pull the official image
+  # Step 1: Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['pull', 'versterre/changedetection.io']
+    args: ['build', '-t', 'gcr.io/trans-airfoil-449223-q8/changedetection', '.']
 
-  # Tag the image for your Container Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['tag', 'versterre/changedetection.io', 'gcr.io/trans-airfoil-449223-q8/changedetection']
-
-  # Push the image to Container Registry
+  # Step 2: Push the image to Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/trans-airfoil-449223-q8/changedetection']
 
-  # Deploy to Cloud Run
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
+  # Step 3: Deploy to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
     args:
       - 'run'
       - 'deploy'
       - 'changedetection'
       - '--image'
       - 'gcr.io/trans-airfoil-449223-q8/changedetection'
-      - '--region'
-      - '${_REGION}'
       - '--platform'
       - 'managed'
-      - '--port'
-      - '5000'
-      - '--allow-unauthenticated'
+      - '--region'
+      - 'us-central1' # Change to your preferred region
+      - '--allow-unauthenticated' # Remove if you want authentication
 
-substitutions:
-  _REGION: us-central1  # Default region, can be overridden
+images:
+  - 'gcr.io/trans-airfoil-449223-q8/changedetection'
 
-options:
-  logging: CLOUD_LOGGING_ONLY
