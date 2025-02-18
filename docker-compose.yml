@@ -66,7 +66,7 @@ services:
   
       # Comment out ports: when using behind a reverse proxy , enable networks: etc.
       ports:
-        - 5000:5000
+        - 8080:8080
       restart: unless-stopped
 
      # Used for fetching pages via WebDriver+Chrome where you need Javascript support.
