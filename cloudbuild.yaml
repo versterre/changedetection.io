@@ -1,11 +1,7 @@
 steps:
   # Step 1: Build the Docker image
-  - name: 'gcr.io/cloud-builders/docker'
-    args: [
-      'build', 
-      '-t', 'us-central1-docker.pkg.dev/trans-airfoil-449223-q8/changedetection-repo/changedetection', 
-      '.'
-    ]
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['-m', 'rsync', '-r', './versterre/', 'gs://versterrewebsitechange/data']
 
   # Step 2: Push the Docker image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
@@ -33,4 +29,5 @@ logsBucket: "gs://versterrewebsitechange/data"  # Store build logs in this bucke
 
 
 
+timeout: 1200s  # Optional: Customize timeout duration as needed
 
