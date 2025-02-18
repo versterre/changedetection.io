@@ -32,3 +32,5 @@ steps:
 logsBucket: "gs://versterrewebsitechange/data"  # Store build logs in this bucket
 
 
+
+
