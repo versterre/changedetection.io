@@ -1,18 +1,8 @@
 steps:
-  # Step 1: Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: [
-      'build', 
-      '-t', 'us-docker.pkg.dev/trans-airfoil-449223-q8/changedetection-repo/changedetection', 
-      '.'
-    ]
-
-  # Step 2: Push the image to Artifact Registry
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/trans-airfoil-449223-q8/my-docker-repo/changedetection', '.']
   - name: 'gcr.io/cloud-builders/docker'
-    args: [
-      'push', 
-      'us-docker.pkg.dev/trans-airfoil-449223-q8/changedetection-repo/changedetection'
-    ]
+    args: ['push', 'us-central1-docker.pkg.dev/trans-airfoil-449223-q8/my-docker-repo/changedetection']
 
   # Step 3: Deploy the image to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
@@ -29,3 +19,5 @@ steps:
       - '--allow-unauthenticated'
 
 logsBucket: "gs://versterrewebsitechange/data"  # Store build logs in this bucket
+
+
