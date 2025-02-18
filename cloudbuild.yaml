@@ -20,5 +20,3 @@ steps:
 
 logsBucket: "gs://versterrewebsitechange/data"  # ✅ Correct placement
 
-options:
-  logging: CLOUD_LOGGING_ONLY  # Optional: Stores logs only in Cloud Logging
