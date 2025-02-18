@@ -3,7 +3,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'build', 
-      '-t', 'us-docker.pkg.dev/trans-airfoil-449223-q8/my-docker-repo/changedetection', 
+      '-t', 'us-docker.pkg.dev/trans-airfoil-449223-q8/changedetection-repo/changedetection', 
       '.'
     ]
 
@@ -11,7 +11,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'push', 
-      'us-docker.pkg.dev/trans-airfoil-449223-q8/my-docker-repo/changedetection'
+      'us-docker.pkg.dev/trans-airfoil-449223-q8/changedetection-repo/changedetection'
     ]
 
   # Step 3: Deploy the image to Cloud Run
@@ -21,11 +21,11 @@ steps:
       - 'deploy'
       - 'changedetection'
       - '--image'
-      - 'us-docker.pkg.dev/trans-airfoil-449223-q8/my-docker-repo/changedetection'
+      - 'us-docker.pkg.dev/trans-airfoil-449223-q8/changedetection-repo/changedetection'
       - '--platform'
       - 'managed'
       - '--region'
       - 'us-central1'
-      - '--allow-unauthenticated'  # Remove if authentication is required
+      - '--allow-unauthenticated'
 
 logsBucket: "gs://versterrewebsitechange/data"  # Store build logs in this bucket
