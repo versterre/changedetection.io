@@ -24,3 +24,6 @@ steps:
 images:
   - 'gcr.io/trans-airfoil-449223-q8/changedetection'
 
+options:
+  logging: CLOUD_LOGGING_ONLY  # Optional: Logs are stored only in Cloud Logging
+  logsBucket: "gs://versterrewebsitechange/data"
